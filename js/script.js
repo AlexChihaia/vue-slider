@@ -34,6 +34,7 @@ createApp({
                 }
             ],
             currentIndex: 0,
+            timer: null,
         };
     },
     methods: {
@@ -49,8 +50,21 @@ createApp({
             if (this.currentIndex < 0) {
                 this.currentIndex = this.slides.length - 1;
             }
-        }
-    }
+        },
+        thumbChange(index) {
+            this.currentIndex = index;
+        },
+        mouseOver() {
+            clearInterval(this.timer);
+        },
+        mouseOut() {
+            this.timer = setInterval(this.next, 3000);
+        },
+    },
+    mounted() {
+        this.timer = setInterval(this.next, 3000);
+    },
+
 }).mount('#app');
 
 
